@@ -27,11 +27,11 @@
         <nav class="col-2 no-padding" style="background-color: #f9f9f9;">
             <ul class="nav flex-column nav-pills">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/users">User</a>
+                    <a class="nav-link active" aria-current="page" href="/auth/users">User</a>
                 </li>
                 <!-- Переменная для проверки роли -->
                 <li class="nav-item" th:if="${isAdmin}">
-                    <a class="nav-link" href="/admin">Admin</a>
+                    <a class="nav-link" href="/auth/admin">Admin</a>
                 </li>
             </ul>
         </nav>

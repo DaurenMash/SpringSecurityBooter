@@ -26,10 +26,10 @@
         <nav class="col-2 no-padding" style="background-color: #f9f9f9;">
             <ul class="nav flex-column nav-pills">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/admin">Admin</a>
+                    <a class="nav-link active" aria-current="page" href="/auth/admin">Admin</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/users">User</a>
+                    <a class="nav-link" href="/auth/users">User</a>
                 </li>
             </ul>
         </nav>
@@ -44,7 +44,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/admin/add" id="show-new-user-form" class="nav-link no-refresh"
+                    <a href="/auth/admin/add" id="show-new-user-form" class="nav-link no-refresh"
                        aria-current="false" role="tab">
                         New User
                     </a>
@@ -97,7 +97,7 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <form th:id="${'editUserForm' + user.id}" th:action="@{/admin/user/{id}/edit(id=${user.id})}" method="POST">
+                                                <form th:id="${'editUserForm' + user.id}" th:action="@{/auth/admin/user/{id}/edit(id=${user.id})}" method="POST">
                                                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                                                     <input type="hidden" th:id="${'editUserId' + user.id}" name="id" th:value="${user.id}"/>
 
@@ -150,7 +150,7 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <form th:id="${'deleteUserForm' + user.id}" th:action="@{/admin/user/{id}/delete(id=${user.id})}" method="post">
+                                                <form th:id="${'deleteUserForm' + user.id}" th:action="@{/auth/admin/user/{id}/delete(id=${user.id})}" method="post">
                                                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                                                     <input type="hidden" th:id="${'deleteUserId' + user.id}" name="id" th:value="${user.id}"/>
 

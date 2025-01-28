@@ -22,16 +22,16 @@
 </nav>
 
 <!-- Общий контейнер с фоном -->
-<div class="container-fluid" style="background-color: #eceef0; height: 100vh; padding: 0;">
+<div class="container-fluid" style="background-color: #ecef; height: 100vh; padding: 0;">
   <div class="row h-100">
     <!-- Боковая панель -->
     <nav class="col-2 no-padding" style="background-color: #f9f9f9;">
       <ul class="nav flex-column nav-pills">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/admin">Admin</a>
+          <a class="nav-link active" aria-current="page" href="/auth/admin">Admin</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/user">User</a>
+          <a class="nav-link" href="/auth/users">User</a>
         </li>
       </ul>
     </nav>
@@ -41,7 +41,7 @@
       <h1 class="mt-3">Admin panel</h1>
       <ul class="nav nav-tabs border-bottom-0 sticky-top">
         <li class="nav-item">
-          <a href="/admin" id="show-users-table" class="nav-link no-refresh"
+          <a href="/auth/admin" id="show-users-table" class="nav-link no-refresh"
              data-bs-toggle="tab" aria-current="false" role="tab">
             Users Table</a>
         </li>
@@ -58,7 +58,7 @@
           <h5>Add new user</h5>
         </div>
         <div class="card-body">
-          <form th:action="@{/admin/add}" method="post" th:object="${newUser}">
+          <form th:action="@{/auth/admin/add}" method="post" th:object="${newUser}">
             <div class="container">
               <div class="col-md-3 mx-auto">
                 <div class="form-group text-center">

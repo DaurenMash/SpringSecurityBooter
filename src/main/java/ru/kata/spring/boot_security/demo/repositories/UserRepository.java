@@ -9,7 +9,9 @@ import javax.validation.constraints.NotEmpty;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+
     @Query("SELECT u FROM User u JOIN FETCH u.roles WHERE u.username = :username")
     User findUserByUsername(@NotEmpty String username);
+
 }
 

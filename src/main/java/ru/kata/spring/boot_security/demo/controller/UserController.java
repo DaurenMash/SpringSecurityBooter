@@ -13,6 +13,7 @@ import ru.kata.spring.boot_security.demo.services.UserService;
 
 @Controller
 @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+@RequestMapping("/auth")
 public class UserController {
 
     private final UserService userService;
@@ -29,7 +30,7 @@ public class UserController {
         if (user != null) {
             model.addAttribute("user", user);
             boolean isAdmin = user.getRoles().stream()
-                    .anyMatch(role -> "ROLE_ADMIN".equals(role.getName()));
+                    .anyMatch(role -> "ADMIN".equals(role.getName()));
             model.addAttribute("isAdmin", isAdmin);
         }
             return "users";

@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.model;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,11 +12,13 @@ import java.util.Collection;
 
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
 @Entity
 @Table(name = "users")
+
 public class User implements UserDetails {
     @Id
     @Column(name = "id")
@@ -108,13 +111,5 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", roles=" + roles +
-                '}';
-    }
+
 }

@@ -11,6 +11,7 @@ import ru.kata.spring.boot_security.demo.repositories.UserRepository;
 
 
 import java.util.List;
+import java.util.Set;
 
 
 @Service
@@ -82,5 +83,6 @@ public class UserServiceImpl implements UserService {
         }
         return user;
     }
+
 
 }
