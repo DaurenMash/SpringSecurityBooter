@@ -13,7 +13,7 @@ import ru.kata.spring.boot_security.demo.services.UserService;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Set;
+
 
 @Controller
 @PreAuthorize("hasRole('ADMIN')")
@@ -86,4 +86,5 @@ public class AdministratorController {
         userService.update(user);
         return "redirect:/auth/admin";
     }
+
 }

@@ -11,11 +11,9 @@ import ru.kata.spring.boot_security.demo.repositories.UserRepository;
 
 
 import java.util.List;
-import java.util.Set;
 
 
 @Service
-@Transactional
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -27,17 +25,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     @Override
+    @Transactional
     public void add(User user) {
         userRepository.save(user);
     }
 
     @Override
+    @Transactional
     public void update(User updateUser) {
         User user = findUserById(updateUser.getId());
         user.setUsername(updateUser.getUsername());
@@ -48,19 +47,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void delete(long id) {
         userRepository.deleteById(id);
     }
 
 
     @Override
-    @Transactional
     public User findUserById(long id) {
-        return userRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("User с данным id не найден"));
+        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User с данным id не найден"));
     }
 
     @Override
+    @Transactional
     public void saveUser(User user, List<Role> roles) {
         user.setRoles(roles);
         user.setPassword(passwordEncoder.passwordEncoder().encode(user.getPassword()));
@@ -68,13 +67,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
     public User findByUserName(String username) {
         return userRepository.findUserByUsername(username);
     }
 
 
-    @Transactional
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = findByUserName(username);

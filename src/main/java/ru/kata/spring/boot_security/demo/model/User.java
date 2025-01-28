@@ -1,6 +1,5 @@
 package ru.kata.spring.boot_security.demo.model;
 
-import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +11,6 @@ import java.util.Collection;
 
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -25,8 +23,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public User() {
-    }
+    public User() {}
 
     @Column(name = "username")
     @NotEmpty
