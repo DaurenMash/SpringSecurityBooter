@@ -5,8 +5,13 @@
     <title>Администратор</title>
 </head>
 <body>
-<a href="/logout">Logout</a>
 <br>
+<form th:action="@{/logout}" method="post">
+    <input type="submit"
+           value="Выйти из учетной записи"
+           style = "width: 250px"
+    />
+</form>
 <h1>Панель администратора</h1>
 <p>Пользователь: [[${username}]]</p>
 <p>Роли: [[${#strings.listJoin(roles, ', ')}]]</p>

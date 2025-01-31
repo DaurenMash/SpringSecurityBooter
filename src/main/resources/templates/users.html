@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Профиль пользователя</title>
-</head>
-<a href="/logout">Logout</a>
-<br>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit"
+               value="Выйти из учетной записи"
+               style = "width: 250px"
+        />
+    </form>
 <body>
 <h1>Профиль пользователя</h1>
 <p>Имя пользователя: [[${user.username}]]</p>
