@@ -49,8 +49,8 @@ public class AdministratorController {
         String name = principal.getName();
         User user = userService.findByUserName(name);
         model.addAttribute("user", user);
-        model.addAttribute("newUser", new User()); //
-        model.addAttribute("allRole", roleService.getAllRoles()); //
+        model.addAttribute("newUser", new User());
+        model.addAttribute("allRole", roleService.getAllRoles());
         return "new_user";
     }
 
@@ -79,12 +79,28 @@ public class AdministratorController {
     }
 
     @PostMapping("/admin/user/{id}/edit")
-    public String updateUser(@PathVariable Long id, @ModelAttribute User user, @RequestParam("roles") List<Long> roleIds) {
-        List<Role> roles = roleService.getRolesById(roleIds);
-        user.setId(id);
-        user.setRoles(roles);
-        userService.update(user);
+    public String updateUser(@PathVariable Long id,
+                             @ModelAttribute User user,
+                             @RequestParam("roles") List<Long> roleIds, Model model) {
+        try {
+            User existingUser = userService.findUserById(id);
+            existingUser.setUsername(user.getUsername());
+            existingUser.setEmail(user.getEmail());
+            if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+                existingUser.setPassword(user.getPassword());
+            }
+            List<Role> roles = roleService.getRolesById(roleIds);
+            existingUser.setRoles(roles);
+            userService.update(existingUser);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            model.addAttribute("users", userService.getAllUsers());
+            model.addAttribute("allRole", roleService.getAllRoles());
+        }
         return "redirect:/auth/admin";
     }
+
 
 }

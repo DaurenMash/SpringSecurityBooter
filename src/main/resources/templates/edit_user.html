@@ -1,35 +1,26 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit User</title>
+    <meta charset="UTF-8"/>
+    <title>Редактирование пользователя</title>
 </head>
 <body>
-<h1>Edit User</h1>
-<form action="/auth/admin/user/{id}/edit" method="post">
-    <input type="hidden" name="id" th:value="${user.id}">>
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" th:value="${user.username}" required>
+<h1>Редактирование пользователя</h1>
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" placeholder="Leave empty to keep current password">
+<form th:action="@{'/auth/admin/user/' + ${user.id} + '/edit'}" th:object="${user}" method="post">
+    <label for="username">Имя пользователя:</label><br/>
+    <input type="text" id="username" name="username" th:field="*{username}"/><br/><br/>
 
-    <label for="email">Email:</label>
-    <input type="text" id="email" name="email" th:value="${user.email}" required min="0" max="120">
+    <label for="email">Электронная почта:</label><br/>
+    <input type="email" id="email" name="email" th:field="*{email}"/><br/><br/>
 
-    <label for="roles">Roles:</label>
-    <select id="roles" name="roles" multiple>
-        <option th:each="role : ${allRole}"
-                th:value="${role.id}"
-                th:text="${role.name}"
-                th:selected="${user.roles.contains(role)}"></option>
-    </select>
-
-    <button type="submit">Update User</button>
+    <label>Роли:</label>
+    <div th:each="role : ${allRole}">
+        <input type="checkbox" name="roles" th:value="${role.id}" th:checked="${user.roles.contains(role)}">
+        <span th:text="${role.name}"></span>
+    </div>
+    <br>
+    <input type="submit" value="Обновить пользователя"/>
 </form>
-
-<a href="/auth/admin">Back to Admin Panel</a>
 </body>
 </html>
