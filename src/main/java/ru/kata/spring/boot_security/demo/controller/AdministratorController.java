@@ -17,7 +17,7 @@ import java.util.List;
 
 @Controller
 @PreAuthorize("hasRole('ADMIN')")
-@RequestMapping("/auth")
+@RequestMapping(path = "/auth")
 public class AdministratorController {
 
     private final UserService userService;
@@ -29,8 +29,7 @@ public class AdministratorController {
         this.roleService = roleService;
     }
 
-    @GetMapping("/admin")
-
+    @RequestMapping(path = "/admin", method = RequestMethod.GET)
     public String adminPage(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         String username = userDetails.getUsername();
         User user = (User) userService.loadUserByUsername(username);
@@ -44,7 +43,7 @@ public class AdministratorController {
         return "admin";
     }
 
-    @GetMapping("/admin/add")
+    @RequestMapping(path = "/admin/add", method = RequestMethod.GET)
     public String showAddUserForm(Model model, Principal principal) {
         String name = principal.getName();
         User user = userService.findByUserName(name);
@@ -54,7 +53,7 @@ public class AdministratorController {
         return "new_user";
     }
 
-    @PostMapping("/admin/add")
+    @RequestMapping(path = "/admin/add", method = RequestMethod.POST)
     public String addUser(@ModelAttribute User user, @RequestParam("roles") List<Long> roleIds) {
         List<Role> roles = roleService.getRolesById(roleIds);
         user.setRoles(roles);
@@ -63,14 +62,14 @@ public class AdministratorController {
     }
 
 
-    @PostMapping("/admin/user/{id}/delete")
+    @RequestMapping(path = "/admin/user/{id}/delete", method = RequestMethod.POST)
     public String deleteUser(@PathVariable Long id) {
         User user = userService.findUserById(id);
         userService.delete(user.getId());
         return "redirect:/auth/admin";
     }
 
-    @GetMapping("/admin/user/{id}/edit")
+    @RequestMapping(path="/admin/user/{id}/edit", method = RequestMethod.GET)
     public String editUser(@PathVariable Long id, Model model) {
         User user = userService.findUserById(id);
         model.addAttribute("user", user);
@@ -78,7 +77,7 @@ public class AdministratorController {
         return "edit_user";
     }
 
-    @PostMapping("/admin/user/{id}/edit")
+    @RequestMapping(path="/admin/user/{id}/edit", method = RequestMethod.POST)
     public String updateUser(@PathVariable Long id, @ModelAttribute User user, @RequestParam("roles") List<Long> roleIds) {
         List<Role> roles = roleService.getRolesById(roleIds);
         user.setId(id);
