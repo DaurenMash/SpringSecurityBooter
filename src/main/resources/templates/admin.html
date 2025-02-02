@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Администратор</title>
+  <meta charset="UTF-8"/>
+  <title>Администратор</title>
 </head>
 <body>
 <br>
 <form th:action="@{/logout}" method="post">
-    <input type="submit"
-           value="Выйти из учетной записи"
-           style = "width: 250px"
-    />
+  <input type="submit"
+         value="Выйти из учетной записи"
+         style = "width: 250px"
+  />
 </form>
 <h1>Панель администратора</h1>
 <p>Пользователь: [[${username}]]</p>
@@ -19,47 +19,47 @@
 
 <h2>Все пользователи:</h2>
 <table border="1">
-    <tr>
-        <th>ID</th>
-        <th>Имя пользователя</th>
-        <th>Роль</th>
-        <th>Действия</th>
-    </tr>
-    <tr th:each="user : ${users}">
-        <td th:text="${user.id}">ID</td>
-        <td th:text="${user.username}">Имя пользователя</td>
-        <td th:text="${#strings.listJoin(user.roles, ', ')}">Роль</td>
-        <td>
-            <a th:href="@{'/auth/admin/user/' + ${user.id} + '/edit'}">Редактировать</a>
-            <form th:action="@{'/auth/admin/user/' + ${user.id} + '/delete'}" method="post">
-                <input type="submit" value="Удалить"/>
-            </form>
-        </td>
-    </tr>
+  <tr>
+    <th>ID</th>
+    <th>Имя пользователя</th>
+    <th>Роль</th>
+    <th>Действия</th>
+  </tr>
+  <tr th:each="user : ${users}">
+    <td th:text="${user.id}">ID</td>
+    <td th:text="${user.username}">Имя пользователя</td>
+    <td th:text="${#strings.listJoin(user.roles, ', ')}">Роль</td>
+    <td>
+      <a th:href="@{'/auth/admin/user/' + ${user.id} + '/edit'}">Редактировать</a>
+      <form th:action="@{'/auth/admin/user/' + ${user.id} + '/delete'}" method="post">
+        <input type="submit" value="Удалить"/>
+      </form>
+    </td>
+  </tr>
 </table>
 
 <h2>Добавление нового пользователя:</h2>
 <form th:action="@{/auth/admin/add}" th:object="${newUser}" method="post">
-    <label for="username">Имя пользователя:</label><br/>
-    <input type="text" id="username" name="username" th:field="*{username}"/><br/><br/>
+  <label for="username">Имя пользователя:</label><br/>
+  <input type="text" id="username" name="username" th:field="*{username}"/><br/><br/>
 
-    <label for="password">Пароль:</label><br/>
-    <input type="password" id="password" name="password" th:field="*{password}"/><br/><br/>
+  <label for="password">Пароль:</label><br/>
+  <input type="password" id="password" name="password" th:field="*{password}"/><br/><br/>
 
-    <label for="email">Электронная почта:</label><br/>
-    <input type="email" id="email" name="email" th:field="*{email}"/><br/><br/>
+  <label for="email">Электронная почта:</label><br/>
+  <input type="email" id="email" name="email" th:field="*{email}"/><br/><br/>
 
-    <label>Роли:</label><br/>
-    <div th:each="role : ${allRole}">
-        <input type="checkbox"
-               name="roles"
-               th:value="${role.id}"
-               th:id="${'role_' + role.id}"
-               th:checked="${newUser.roles != null && newUser.roles.contains(role)}"/>
-        <label th:for="${'role_' + role.id}" th:text="${role.name}"></label><br/>
-    </div>
-    <br/>
-    <input type="submit" value="Создать пользователя"/>
+  <label>Роли:</label><br/>
+  <div th:each="role : ${allRole}">
+    <input type="checkbox"
+           name="roles"
+           th:value="${role.id}"
+           th:id="${'role_' + role.id}"
+           th:checked="${newUser.roles != null && newUser.roles.contains(role)}"/>
+    <label th:for="${'role_' + role.id}" th:text="${role.name}"></label><br/>
+  </div>
+  <br/>
+  <input type="submit" value="Создать пользователя"/>
 </form>
 </body>
 </html>
